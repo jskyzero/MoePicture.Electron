@@ -12,8 +12,33 @@ import ReactDOM from 'react-dom';
 // // Learn more about service workers: http://bit.ly/CRA-PWA
 // serviceWorker.unregister();
 
+var ticker = () => {
+  const time = (new Date().toLocaleTimeString());
+
+var formatName = (user) => {
+  return user.name + user.email;
+}
+
+const user = {
+  name: "Name",
+  email: "Email",
+};
+
+
+const element = (
+  <div>
+  <h1>
+  Hello {formatName(user)}!
+  </h1>
+  <p>Now time is {time}</p>
+  </div>
+  );
 
 ReactDOM.render(
-  <h1>Hello World!</h1>,
+  element,
   document.getElementById("root")
 );
+
+}
+
+setInterval(ticker, 1000);
