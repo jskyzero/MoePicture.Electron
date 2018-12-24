@@ -15,30 +15,31 @@ import ReactDOM from 'react-dom';
 var ticker = () => {
   const time = (new Date().toLocaleTimeString());
 
-var formatName = (user) => {
-  return user.name + user.email;
-}
+  var formatName = (user) => {
+    return user.name + "(" + user.email + ")";
+  }
 
-const user = {
-  name: "Name",
-  email: "Email",
-};
+  const user = {
+    name: "jskyzero",
+    email: "jskyzero@outlook.com",
+  };
 
 
-const element = (
-  <div>
-  <h1>
-  Hello {formatName(user)}!
-  </h1>
-  <p>Now time is {time}</p>
-  </div>
+  // same to React.createElement()
+  const element = (
+    <div>
+      <h1>Timer!</h1>
+      <p local_user={user}>welcome {formatName(user)}</p>
+      <p>Now time is {time}</p>
+    </div>
   );
 
-ReactDOM.render(
-  element,
-  document.getElementById("root")
-);
+  ReactDOM.render(
+    element,
+    document.getElementById("root")
+  );
 
 }
 
+// render will only update changed part
 setInterval(ticker, 1000);
