@@ -12,11 +12,11 @@ import ReactDOM from 'react-dom';
 // // Learn more about service workers: http://bit.ly/CRA-PWA
 // serviceWorker.unregister();
 
-var ticker = () => {
+let ticker = () => {
   const time = (new Date().toLocaleTimeString());
 
   var formatName = (user) => {
-    return user.name + "(" + user.email + ")";
+    return `${user.name}(${user.email})`;
   }
 
   const user = {
