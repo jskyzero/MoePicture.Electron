@@ -12,24 +12,33 @@ import ReactDOM from 'react-dom';
 // // Learn more about service workers: http://bit.ly/CRA-PWA
 // serviceWorker.unregister();
 
+let formatName = (user) => {
+  return `${user.name}(${user.email})`;
+}
+
+const user = {
+  name: "jskyzero",
+  email: "jskyzero@outlook.com",
+};
+
+class WelcomeUser extends React.Component {
+  render = () => {
+    return (
+      <div>
+        <p>welcome {formatName(this.props.user)}</p>
+      </div>
+    );
+  }
+}
+
 let ticker = () => {
   const time = (new Date().toLocaleTimeString());
-
-  var formatName = (user) => {
-    return `${user.name}(${user.email})`;
-  }
-
-  const user = {
-    name: "jskyzero",
-    email: "jskyzero@outlook.com",
-  };
-
 
   // same to React.createElement()
   const element = (
     <div>
       <h1>Timer!</h1>
-      <p local_user={user}>welcome {formatName(user)}</p>
+      <WelcomeUser user={user}></WelcomeUser>
       <p>Now time is {time}</p>
     </div>
   );
@@ -38,7 +47,6 @@ let ticker = () => {
     element,
     document.getElementById("root")
   );
-
 }
 
 // render will only update changed part
