@@ -12,14 +12,14 @@ import ReactDOM from 'react-dom';
 // // Learn more about service workers: http://bit.ly/CRA-PWA
 // serviceWorker.unregister();
 
-let formatName = (user) => {
-  return `${user.name}(${user.email})`;
-}
-
 const user = {
   name: "jskyzero",
   email: "jskyzero@outlook.com",
 };
+
+let formatName = (user) => {
+  return `${user.name}(${user.email})`;
+}
 
 class WelcomeUser extends React.Component {
   render = () => {
@@ -31,23 +31,43 @@ class WelcomeUser extends React.Component {
   }
 }
 
-let ticker = () => {
-  const time = (new Date().toLocaleTimeString());
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { date: new Date };
+  }
 
-  // same to React.createElement()
-  const element = (
-    <div>
-      <h1>Timer!</h1>
-      <WelcomeUser user={user}></WelcomeUser>
-      <p>Now time is {time}</p>
-    </div>
-  );
+  componentDidMount() {
+    this.timerID = setInterval(() => this.tick(), 1000);
+  }
 
-  ReactDOM.render(
-    element,
-    document.getElementById("root")
-  );
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({ date: new Date });
+  }
+  render = () => {
+    return (
+      <p>Now time is {this.state.date.toLocaleTimeString()}</p>
+    );
+  }
 }
 
-// render will only update changed part
-setInterval(ticker, 1000);
+class Header extends React.Component {
+  render = () => {
+    return (
+      <div>
+        <h1>Timer!</h1>
+        <WelcomeUser user={this.props.user}></WelcomeUser>
+        <Clock></Clock>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <Header user={user} />,
+  document.getElementById("root")
+);

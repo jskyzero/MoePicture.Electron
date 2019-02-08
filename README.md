@@ -17,4 +17,14 @@ So, here is a react playground, for I must try react and compare with angular.
 + Component & Props
   + `function Hello(Props) { return (<p>props.name</p>); };`
   + make Props read only
-+ Todo
++ State & Life circle
+  + 
+  ```js
+  class xxx extend ReactDOM.component {
+    constructor() {}
+    componentDidMount() {}
+    componentWillUnMount() {}
+    tick() {}
+    render() { return () }
+  }
+  ```
