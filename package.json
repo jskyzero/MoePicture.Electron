@@ -2,9 +2,10 @@
   "name": "moe-picture",
   "version": "0.1.0",
   "main": ".electron.js",
-  "homepage":".",
+  "homepage": ".",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
     "electron": "^4.0.4",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
@@ -15,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron": "npm run-script build && electron ."
+    "electron": "electron ."
   },
   "eslintConfig": {
     "extends": "react-app"
