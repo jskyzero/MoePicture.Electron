@@ -14,10 +14,10 @@ So, here is a react playground, for I must try react and compare with angular.
 + Render
   + `ReactDOM.render(element, document.getElementById("root"));`
   + `function tick() {}; setInterval(tick, 1000);`
-+ Component & Props
++ Components & Props
   + `function Hello(Props) { return (<p>props.name</p>); };`
   + make Props read only
-+ State & Life circle
++ State & Lifecycle
   + 
   ```js
   class xxx extend ReactDOM.component {
@@ -28,3 +28,10 @@ So, here is a react playground, for I must try react and compare with angular.
     render() { return () }
   }
   ```
++ Handling Event
++ Conditional Rendering
++ Lists and Keys
++ Forms
++ Lifting State Up
++ Compositions Vs Inheritance
++ Think in React

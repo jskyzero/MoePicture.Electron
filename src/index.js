@@ -48,10 +48,32 @@ class Clock extends React.Component {
   tick() {
     this.setState({ date: new Date });
   }
+
   render = () => {
     return (
       <p>Now time is {this.state.date.toLocaleTimeString()}</p>
     );
+  }
+}
+
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state =  { isToggleOn:false };
+  }
+
+  handleClick = () => {
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn
+    }))
+  }
+
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+      {this.state.isToggleOn ? "On" : "Off"}
+      </button>
+    )
   }
 }
 
@@ -62,6 +84,7 @@ class Header extends React.Component {
         <h1>Timer!</h1>
         <WelcomeUser user={this.props.user}></WelcomeUser>
         <Clock></Clock>
+        <Toggle></Toggle>
       </div>
     );
   }
