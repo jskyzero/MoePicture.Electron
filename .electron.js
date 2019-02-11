@@ -1,5 +1,6 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron')
+const {main} = require('./server/main.js')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -9,7 +10,7 @@ function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800, height: 600,
-    webPreferences: {webSecurity: false}
+    // webPreferences: {webSecurity: false}
   })
 
   // and load the index.html of the app.
@@ -53,3 +54,9 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+// const { fork } = require('child_process');
+// const child = fork('server/main.js');
+main();
+
+console.log("main finish");
