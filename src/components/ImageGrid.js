@@ -8,14 +8,17 @@ class ImageGrid extends React.Component {
     super(props);
     this.state = {
       items: null,
-      url: 'https://yande.re/post.xml?limit=100'
+      url: 'https://yande.re/post.xml?limit=100',
+      str: "null"
     };
   }
 
   componentDidMount() {
     let website = new WebSite(this.state.url);
     website.GetItems().then((items) => {
-      this.setState({items: items})
+      this.setState({
+        items: items
+      })
     });
     // let str = xml.getElementsByTagName("post").item(0).getAttribute("sample_url");
     // this.setState({txt: str});
@@ -25,14 +28,24 @@ class ImageGrid extends React.Component {
 
   }
 
+  getImage = () => {
+    let website = new WebSite(this.state.url);
+    website.GetImage().then((url) => {
+      this.setState({str: url});
+    });
+  }
+
   render = () => {
-    let items = this.state.items ? this.state.items.map((item) => {
-      return <ImageGridItem key={item.id} item={item}/>
-    }) : null;
+    // let items = this.state.items ? this.state.items.map((item) => {
+    //   return <ImageGridItem key={item.id} item={item}/>
+    // }) : null;
 
     return (
       <div>
-          {items}
+          {/* {items} */}
+          <button onClick={this.getImage}>
+          {this.state.str}
+          </button>
       </div>
     )
   }
