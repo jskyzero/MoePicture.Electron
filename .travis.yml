@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "10"
+os:
+  - linux
+  - osx
+
+
+before_script:
+  - npm install -g create-react-app
+script:
+  - npm install
+  - npm run-script electron-builder
+after_success:
+  # so, pass the test...
+  - echo '(￣▽￣)~*' cheers!
