@@ -1,7 +1,7 @@
 import React from 'react';
 import ImageGridItem from './ImageGridItem'
 import WebSite from '../services/website';
-
+import Button from "react-uwp/Button";
 
 
 class ImageGrid extends React.Component {
@@ -37,18 +37,19 @@ class ImageGrid extends React.Component {
   }
 
   render = () => {
-    // let items = this.state.items ? this.state.items.map((item) => {
-    //   return <ImageGridItem key={item.id} item={item}/>
-    // }) : null;
+    let items = this.state.items ? this.state.items.map((item) => {
+      return <ImageGridItem key={item.id} item={item}/>
+    }) : null;
 
     return (
       <div>
-          {/* {items} */}
-          <button onClick={this.getImage}>
-          {this.state.str}
-          </button>
-          { this.state.str != null &&
-          <img src={this.state.str}></img>}
+          {items}
+          {/* <Button onClick={this.getImage}
+            tooltip="Mini Tooltip">
+          {this.state.str || "click" }
+          </Button> */}
+          {/* { this.state.str != null &&
+          <img src={this.state.str}></img>} */}
       </div>
     )
   }
