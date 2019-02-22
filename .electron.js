@@ -19,7 +19,7 @@ function createWindow() {
   // mainWindow.loadURL(`file://${__dirname}/build/index.html`)
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -60,6 +60,6 @@ app.on('activate', function () {
 // const child = fork('server/main.js');
 
 // use import
-server.serve(3000);
+server.serve(4000);
 
 console.log("main finish");
