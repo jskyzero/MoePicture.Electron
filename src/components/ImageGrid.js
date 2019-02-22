@@ -3,13 +3,14 @@ import ImageGridItem from './ImageGridItem'
 import WebSite from '../services/website';
 
 
+
 class ImageGrid extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       items: null,
       url: 'https://yande.re/post.xml?limit=100',
-      str: "null"
+      str: null
     };
   }
 
@@ -46,6 +47,8 @@ class ImageGrid extends React.Component {
           <button onClick={this.getImage}>
           {this.state.str}
           </button>
+          { this.state.str != null &&
+          <img src={this.state.str}></img>}
       </div>
     )
   }

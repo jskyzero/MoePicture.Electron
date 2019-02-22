@@ -1,3 +1,5 @@
 const { server } = require('./server.js')
+const { config } = require('../src/config.js')
 
-server.serve(4000);
+
+server.serve(config.port);

@@ -7,6 +7,20 @@ const downloadImage = (url, path, callback) => {
   request.get(url).pipe(fs.createWriteStream(path, 'binary').on('close', callback));
 }
 
+const readImage = (path, then, error) => {
+  if (fs.existsSync(path)) {
+    fs.readFile(path, function (err, data) {
+      if (err) {
+        error();
+      } else {
+        then(data);
+      }
+    });
+  } else {
+    error();
+  }
+}
+
 const ensureDirectoryExistence = (filePath) => {
   var dirname = path.dirname(filePath);
   if (fs.existsSync(dirname)) {
@@ -16,4 +30,9 @@ const ensureDirectoryExistence = (filePath) => {
   fs.mkdirSync(dirname);
 }
 
-module.exports = { spider: { downloadImage: downloadImage } }
+module.exports = {
+  spider: {
+    downloadImage: downloadImage,
+    readImage: readImage
+  }
+}

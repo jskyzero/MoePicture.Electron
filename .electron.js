@@ -1,6 +1,8 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
 const { server } = require('./server/server.js')
+const { config } = require('./src/config.js')
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -14,8 +16,8 @@ function createWindow() {
   })
 
   // and load the index.html of the app.
-  // mainWindow.loadURL('http://localhost:3000/')
-  mainWindow.loadFile('./build/index.html')
+  mainWindow.loadURL('http://localhost:3000/')
+  // mainWindow.loadFile('./build/index.html')
   // mainWindow.loadURL(`file://${__dirname}/build/index.html`)
 
   // Open the DevTools.
@@ -60,6 +62,6 @@ app.on('activate', function () {
 // const child = fork('server/main.js');
 
 // use import
-server.serve(4000);
+server.serve(config.port);
 
-console.log("main finish");
+console.log("Electron: ", "main finish");
