@@ -42,7 +42,7 @@ class ImageGrid extends React.Component {
     }) : null;
 
     return (
-      <div>
+      <div style={{overflow: "auto", height:"100vh"}}>
           {items}
           {/* <Button onClick={this.getImage}
             tooltip="Mini Tooltip">

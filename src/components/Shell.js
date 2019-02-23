@@ -18,12 +18,15 @@ export default class Shell extends React.Component {
   }
 
 
-  render = () => {
-    if (this.state.selectType === "Settings") {
-      return <Settings />
-    } else {
-      return <ImageGrid />
-    }
-  }
+  render = () => (
+    <div style={{ marginLeft: "48px"}}>
+      {this.state.selectType === "Settings" &&
+        <Settings />
+      }
+      {this.state.selectType === "Yande" &&
+        <ImageGrid />
+      }
+    </div>
+  );
 
 }

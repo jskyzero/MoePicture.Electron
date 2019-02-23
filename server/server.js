@@ -22,10 +22,24 @@ const onRequest = (request, response) => {
     case config.imageAPIKey:
       imageAPIProcess(config.imageAPIParams(params), response);
       break;
+    case config.proxyAPIKey:
+      proxyAPIProcess(config.proxyAPIParams(params), response);
+      break;
     default:
       defaultProcess(response);
       break;
   }
+}
+
+const proxyAPIProcess = (paramConfig, res) => {
+  const url = paramConfig.url;
+  spider.loadUrl(url, (response, data) => {
+    res.writeHead(200, {
+      "Content-Length": data.length,
+      "Content-Type": response.headers['content-type'],
+      "Access-Control-Allow-Origin": "*"});
+    res.end(data);
+  })
 }
 
 const getMimeType = (pathname) => {
@@ -45,9 +59,10 @@ const imageAPIProcess = (paramConfig, res) => {
   const pathname = config.imagePath(paramConfig.foldername, paramConfig.filename);
   const mimeType = getMimeType(pathname);
   spider.readImage(pathname, (data) => {
-    res.setHeader("Content-Length", data.length);
-    res.setHeader("Content-Type", mimeType);
-    res.statusCode = 200;
+    response.writeHead(200, {
+      "Content-Length": data.length,
+      "Content-Type": mimeType,
+      "Access-Control-Allow-Origin": "*"});
     res.end(data);
   }, () => {
     res.writeHead(500);

@@ -12,10 +12,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-.ImageGridItem {
-  width: 10%;
-  float: left;
-  display: flex;
-  background: brown;
-}

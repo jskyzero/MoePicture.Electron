@@ -42,13 +42,13 @@ export default class Navigation extends React.Component {
     ];
 
     return (
-      <div>
+      <div style={{ height: "100vh", overflow: "hidden"}}>
           <NavigationView
             isControlled={false}
-            style={{ width: "100%", minHeight: "100vh", ...baseStyle }}
+            style={{width: "100%", height: "100vh", ...baseStyle }}
             pageTitle="MoePicture"
-            displayMode="compact"
-            autoResize={true}
+            displayMode="overlay"
+            autoResize={false}
             initWidth={48}
             expandedWidth={240}
             defaultExpanded={false}

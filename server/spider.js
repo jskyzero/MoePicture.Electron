@@ -4,8 +4,19 @@ const request = require('request');
 
 const downloadImage = (url, path, callback) => {
   ensureDirectoryExistence(path);
-  request.get(url).pipe(fs.createWriteStream(path, 'binary').on('close', callback));
+  request.get(url)
+    .on('error', (err) => { console.log(err) })
+    .pipe(fs.createWriteStream(path, 'binary')
+    .on('close', callback));
 }
+
+const loadUrl = (url, callback) => {
+  request(url, (error, response, body) => {
+    error && console.log(error)
+    callback(response, body);
+  });
+}
+
 
 const readImage = (path, then, error) => {
   if (fs.existsSync(path)) {
@@ -33,6 +44,7 @@ const ensureDirectoryExistence = (filePath) => {
 module.exports = {
   spider: {
     downloadImage: downloadImage,
-    readImage: readImage
+    readImage: readImage,
+    loadUrl: loadUrl,
   }
 }

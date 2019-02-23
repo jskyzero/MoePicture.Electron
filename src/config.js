@@ -6,6 +6,7 @@ const config = {
   "configFolder": ".moepicture",
   "mainAPIKey": "/moepicture",
   "imageAPIKey": "/moepicture/img",
+  "proxyAPIKey": "/moepicture/proxy",
   "mainAPIUrl": (imgUrl, foldername, filename) => {
     return "http://" + config.ip + ":" + config.port + config.mainAPIKey + "?" +
       "url=" + encodeURIComponent(imgUrl) + "&" +
@@ -28,6 +29,15 @@ const config = {
     return {
       "foldername": params.foldername,
       "filename": params.filename,
+    };
+  },
+  "proxyAPIUrl": (url) => {
+    return "http://" + config.ip + ":" + config.port + config.proxyAPIKey + "?" +
+      "url=" + encodeURIComponent(url);
+  },
+  "proxyAPIParams": (params) => {
+    return {
+      "url": params.url,
     };
   },
   "imagePath": (foldername, filename) => {

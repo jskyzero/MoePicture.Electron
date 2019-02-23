@@ -10,7 +10,7 @@ class WebSite {
   }
 
   GetItems() {
-    return axios.get(this.url)
+    return axios.get(config.proxyAPIUrl(this.url))
       .then(response => {
         let parser = new DOMParser();
         let xml = parser.parseFromString(response.data, "application/xml");
