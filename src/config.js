@@ -81,6 +81,8 @@ const config = {
       case "Safebooru":
         url = config.WebSiteUrls[websiteType] + "&pid=" + pageIndex + searchStr;
         break;
+      default:
+        break;
     }
     console.log(url);
     return url;
@@ -121,6 +123,28 @@ const config = {
       "width": "image-width",
       "height": "image-height",
     },
+    "Gelbooru": {
+      "id": "id",
+      "tags": "tags",
+      "title": "id",
+      "previewUrl": "preview_url",
+      "sampleUrl": "sample_url",
+      "sourceUrl": "file_url",
+      "isSafe": "rating",
+      "width": "preview_width",
+      "height": "preview_height",
+    },
+    "Safebooru": {
+      "id": "tags",
+      "tags": "tags",
+      "title": "id",
+      "previewUrl": "preview_url",
+      "sampleUrl": "sample_url",
+      "sourceUrl": "file_url",
+      "isSafe": "rating",
+      "width": "preview_width",
+      "height": "preview_height",
+    },
   },
   "WebSiteMap2": {
     "Yande": {
@@ -132,7 +156,18 @@ const config = {
     "Danbooru": {
       "isSafe": (value) => value === "s",
     },
+    "Gelbooru": {
+      "isSafe": (value) => value === "s",
+    },
+    "Safebooru": {
+      "isSafe": (value) => value === "s",
+      "previewUrl": (value) => "http:" + value,
+      "sampleUrl": (value) => "http:" + value,
+      "sourceUrl": (value) => "http:" + value,
+    },
   },
+
+  // logic part
   xmlParserWithAttributes: (key, xmlNode, websiteType) =>
       xmlNode.attributes[config.WebSiteMap[websiteType][key]].nodeValue,
   xmlParserWithSubNodes: (key, xmlNode, websiteType) =>
@@ -173,9 +208,9 @@ const config = {
       // console.log(item["isOK"]);
       return item;
     }
-
-
   }
+
+  // end
 }
 
 module.exports = { config: config }
