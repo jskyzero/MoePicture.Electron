@@ -14,3 +14,15 @@ script:
 after_success:
   # so, pass the test...
   - echo '(￣▽￣)~*' cheers!
+
+
+deploy:
+  provider: releases
+  file: "dist"
+  api_key: $GITHUB_TOKEN
+  skip_cleanup: true
+  file_glob: true
+  on:
+    branches:
+      only:
+        - master
