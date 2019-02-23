@@ -15,10 +15,9 @@ class WebSite {
       config.GetWebSiteUrl(this.type, this.tag, this.index++)
     ))
     .then(response => {
-        let parser = new DOMParser();
-        let xml = parser.parseFromString(response.data, "application/xml");
+        let xml = (new DOMParser()).parseFromString(response.data, "application/xml");
         let items = Array.from(xml.getElementsByTagName("post"),
-          node => config.ItemFromXML(new ImageItem(), node, this.type));
+          node => config.ItemFromXML(node, this.type)).filter(item => item.isOK);
         return items;
       })
   }

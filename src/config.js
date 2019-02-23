@@ -54,7 +54,12 @@ const config = {
     return imagePath;
   },
 
+
+  //
+  //
   // WebSite Static variable
+  //
+  //
   "WebSites": ["Yande", "Konachan", "Danbooru", "Gelbooru", "Safebooru"],
   "WebSiteUrls": {
     "Yande": "https://yande.re/post.xml?limit=100",
@@ -80,31 +85,96 @@ const config = {
     console.log(url);
     return url;
   },
+
+  // map part
   "WebSiteMap": {
     "Yande": {
       "id": "id",
       "title": "id",
+      "tags": "tags",
       "previewUrl": "preview_url",
       "sampleUrl": "sample_url",
-    }
+      "sourceUrl": "jpeg_url",
+      "isSafe": "rating",
+      "width": "preview_width",
+      "height": "preview_height",
+    },
+    "Konachan": {
+      "id": "id",
+      "tags": "tags",
+      "title": "id",
+      "previewUrl": "preview_url",
+      "sampleUrl": "sample_url",
+      "sourceUrl": "jpeg_url",
+      "isSafe": "rating",
+      "width": "preview_width",
+      "height": "preview_height",
+    },
+    "Danbooru": {
+      "id": "id",
+      "tags": "tag-string-general",
+      "title": "id",
+      "previewUrl": "preview-file-url",
+      "sampleUrl": "file-url",
+      "sourceUrl": "large-file-url",
+      "isSafe": "rating",
+      "width": "image-width",
+      "height": "image-height",
+    },
   },
-  xmlParserWithAttributes: (item, xmlNode, mapTable) => {
-    // console.log(xmlNode.attributes[mapTable["id"]].nodeValue);
-    for (let key in mapTable) {
-      // console.log(mapTable[key]);
-      item[key] = xmlNode.attributes[mapTable[key]].nodeValue;
-    }
-    return item;
+  "WebSiteMap2": {
+    "Yande": {
+      "isSafe": (value) => value === "s",
+    },
+    "Konachan": {
+      "isSafe": (value) => value === "s",
+    },
+    "Danbooru": {
+      "isSafe": (value) => value === "s",
+    },
   },
-  "ItemFromXML": (item, xmlNode, websiteType) => {
-    switch (websiteType) {
-      case "Yande":
-      case "Konachan":
-      case "Danbooru":
-        return config.xmlParserWithAttributes(item, xmlNode, config.WebSiteMap[websiteType])
-      case "Gelbooru":
-      case "Safebooru":
+  xmlParserWithAttributes: (key, xmlNode, websiteType) =>
+      xmlNode.attributes[config.WebSiteMap[websiteType][key]].nodeValue,
+  xmlParserWithSubNodes: (key, xmlNode, websiteType) =>
+      xmlNode.getElementsByTagName(
+          config.WebSiteMap[websiteType][key])[0].childNodes[0].nodeValue,
+  "ItemFromXML": (xmlNode, websiteType) => {
+    let item = {};
+    try {
+      for (let key in config.WebSiteMap[websiteType]) {
+        switch (websiteType) {
+          case "Yande":
+          case "Konachan":
+            item[key] = config.xmlParserWithAttributes(key, xmlNode, websiteType);
+            break;
+          case "Danbooru":
+            item[key] =  config.xmlParserWithSubNodes(key, xmlNode, websiteType);
+            break;
+          case "Gelbooru":
+          case "Safebooru":
+            item[key] = config.xmlParserWithAttributes(key, xmlNode, websiteType);
+            break;
+          default:
+            break;
+        }
+      }
+      for (let key in config.WebSiteMap2[websiteType]) {
+        item[key] = config.WebSiteMap2[websiteType][key](item[key]);
+      }
+      item["isOK"] = true;
     }
+    catch (e) {
+      console.log(e);
+      console.log(xmlNode);
+      console.log(item);
+      item["isOK"] = false;
+    }
+    finally {
+      // console.log(item["isOK"]);
+      return item;
+    }
+
+
   }
 }
 
