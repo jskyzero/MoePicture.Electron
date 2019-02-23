@@ -8,47 +8,70 @@ class ImageGrid extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: null,
-      url: 'https://yande.re/post.xml?limit=100',
-      str: null
+      websiteType: props.websiteType,
+      items: [],
     };
+    this.website = new WebSite(props.websiteType, "");
   }
 
   componentDidMount() {
-    let website = new WebSite(this.state.url);
-    website.GetItems().then((items) => {
-      this.setState({
-        items: items
-      })
-    });
-    // let str = xml.getElementsByTagName("post").item(0).getAttribute("sample_url");
-    // this.setState({txt: str});
+    this.getMoreItems();
   }
+
 
   componentWillUnmount() {
-
+    this.setState({
+      items: [],
+    })
   }
 
-  getImage = () => {
-    let website = new WebSite(this.state.url);
-    website.GetImage().then((url) => {
-      this.setState({str: url});
+  componentWillReceiveProps(nextProps) {
+    // You don't have to do this check first, but it can help prevent an unneeded render
+    if (nextProps.websiteType !== this.state.websiteType) {
+      this.setState({
+        items: [],
+        websiteType: nextProps.websiteType,
+      });
+      this.website = new WebSite(nextProps.websiteType, "");
+      this.getMoreItems();
+    }
+  }
+
+  getMoreItems = () => {
+    this.website.GetItems().then((newItems) => {
+      this.setState((prevState, props) => ({
+        items: prevState.items.concat(newItems),
+      }));
     });
   }
+
+  scrollCallback = (e) => {
+    if (e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight) {
+      this.getMoreItems();
+    }
+  }
+
+  // getImage = () => {
+  //   let website = new WebSite(this.state.url);
+  //   website.GetImage().then((url) => {
+  //     this.setState({ str: url });
+  //   });
+  // }
 
   render = () => {
     let items = this.state.items ? this.state.items.map((item) => {
-      return <ImageGridItem key={item.id} item={item}/>
+      return <ImageGridItem key={item.id} item={item} />
     }) : null;
 
     return (
-      <div style={{overflow: "auto", height:"100vh"}}>
-          {items}
-          {/* <Button onClick={this.getImage}
+      <div style={{ overflow: "auto", height: "100vh" }}
+        onScroll={this.scrollCallback}>
+        {items}
+        {/* <Button onClick={this.getImage}
             tooltip="Mini Tooltip">
           {this.state.str || "click" }
           </Button> */}
-          {/* { this.state.str != null &&
+        {/* { this.state.str != null &&
           <img src={this.state.str}></img>} */}
       </div>
     )

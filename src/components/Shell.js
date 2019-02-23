@@ -1,6 +1,9 @@
 import React from 'react';
 import Settings from './Settings';
 import ImageGrid from './ImageGrid';
+const { config } = require('../config.js');
+
+
 
 export default class Shell extends React.Component {
   constructor(props) {
@@ -23,8 +26,8 @@ export default class Shell extends React.Component {
       {this.state.selectType === "Settings" &&
         <Settings />
       }
-      {this.state.selectType === "Yande" &&
-        <ImageGrid />
+      {config.WebSites.indexOf(this.state.selectType) > -1 &&
+        <ImageGrid websiteType={this.state.selectType}/>
       }
     </div>
   );

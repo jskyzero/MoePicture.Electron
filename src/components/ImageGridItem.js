@@ -12,7 +12,7 @@ class ImageGridItem extends React.Component {
     return (
       <div style={{height: "200px", width: "10%", float:"left"}}>
         <img
-          style={{width: "100%"}}
+          style={{width: "100%", height: "100%"}}
           src={this.state.item.previewUrl}
           alt={this.state.item.title}/>
       </div>

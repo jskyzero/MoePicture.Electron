@@ -5,6 +5,8 @@ import NavigationView from "react-uwp/NavigationView";
 import SplitViewCommand from "react-uwp/SplitViewCommand";
 import Shell from "./Shell"
 
+const { config } = require('../config.js');
+
 export default class Navigation extends React.Component {
   static contextTypes = { theme: PropTypes.object };
 
@@ -18,7 +20,7 @@ export default class Navigation extends React.Component {
     // this.handleNodeClick = this.handleNodeClick.bind(this);
   }
 
-  handleNodeClick = (event) => {
+  NodeClickCallback = (event) => {
     // console.log(event.currentTarget.id);
     this.setState({selectType: event.currentTarget.id});
     // console.log(this.state);
@@ -31,14 +33,14 @@ export default class Navigation extends React.Component {
       margin: 0
     });
 
-    const navigationTopNodes = [
-      <SplitViewCommand icon={"\uEB9F"} label="Yande" id ="Yande"
-        onClick={this.handleNodeClick}/>,
-    ];
+    const navigationTopNodes = config.WebSites.map((each) =>
+      <SplitViewCommand icon={"\uEB9F"} label={each} id = {each}
+        onClick={this.NodeClickCallback}/>
+    );
 
     const navigationBottomNode = [
       <SplitViewCommand icon={"\uE713"} label="Settings" id ="Settings"
-        onClick={this.handleNodeClick}/>,
+        onClick={this.NodeClickCallback}/>,
     ];
 
     return (
