@@ -1,5 +1,5 @@
 import axios from 'axios'
-import ImageItem from '../models/ImageItem';
+
 const { config } = require('../config.js');
 
 class WebSite {

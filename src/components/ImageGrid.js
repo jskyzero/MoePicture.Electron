@@ -1,7 +1,6 @@
 import React from 'react';
 import ImageGridItem from './ImageGridItem'
 import WebSite from '../services/website';
-import Button from "react-uwp/Button";
 
 
 class ImageGrid extends React.Component {
@@ -17,7 +16,6 @@ class ImageGrid extends React.Component {
   componentDidMount() {
     this.getMoreItems();
   }
-
 
   componentWillUnmount() {
     this.setState({
@@ -46,6 +44,7 @@ class ImageGrid extends React.Component {
   }
 
   scrollCallback = (e) => {
+    console.log(e.target.scrollHeight, e.target.scrollTop, e.target.clientHeight)
     if (e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight) {
       this.getMoreItems();
     }
@@ -64,8 +63,9 @@ class ImageGrid extends React.Component {
     }) : null;
 
     return (
-      <div style={{ overflow: "auto", height: "100vh" }}
+      <div style={{ overflowY: "scroll", height: "100vh" }}
         onScroll={this.scrollCallback}>
+
         {items}
         {/* <Button onClick={this.getImage}
             tooltip="Mini Tooltip">

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Image from "react-uwp/Image";
 
 class ImageGridItem extends React.Component {
   constructor(props) {
@@ -11,16 +10,15 @@ class ImageGridItem extends React.Component {
   render = () => {
     return (
       <div>
-      {
-        this.state.item.isSafe &&
+      {/* {
+        this.state.item.isSafe && */}
         <div style={{ height: "200px", width: "10%", float: "left" }}>
         <img
           style={{ width: "100%", height: "100%" }}
           src={this.state.item.previewUrl}
           alt={this.state.item.title} />
       </div>
-      }
-
+      {/* } */}
       </div>
     )
   }
