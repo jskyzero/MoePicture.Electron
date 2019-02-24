@@ -50,12 +50,12 @@ class ImageGrid extends React.Component {
     }
   }
 
-  // getImage = () => {
-  //   let website = new WebSite(this.state.url);
-  //   website.GetImage().then((url) => {
-  //     this.setState({ str: url });
-  //   });
-  // }
+  getImage = (ImgUrl, fileName, e) => {
+    this.website.GetImage(ImgUrl, this.website.type, fileName + ".jpg");
+    // this.website.GetImage().then((url) => {
+    //   this.setState({ str: url });
+    // });
+  }
 
   render = () => {
     // todo each width
@@ -65,7 +65,8 @@ class ImageGrid extends React.Component {
     let width = 100 / parseInt(totolWidth / 200);
 
     let items = this.state.items.map((item) => {
-      return <ImageGridItem key={item.id} item={item} width={width} />
+      return <ImageGridItem key={item.id} item={item} width={width}
+                onClick={this.getImage.bind(this, item.sampleUrl, item.id)}/>
     });
 
     return (

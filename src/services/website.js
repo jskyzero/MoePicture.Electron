@@ -22,13 +22,14 @@ class WebSite {
       })
   }
 
-  GetImage(imgUrl) {
-    const url = config.mainAPIUrl(imgUrl, "yande", "test.jpg");
+  GetImage(imgUrl, folderName, fileName) {
+    const url = config.mainAPIUrl(imgUrl, folderName, fileName);
     console.log(url);
-    return axios.get(url).then(res => {
-      // return "file:///" + res.data;
-      return config.imageAPIUrl("yande", "test.jpg");
-    });
+    axios.get(url);
+    // return axios.get(url).then(res => {
+    //   // return "file:///" + res.data;
+    //   return config.imageAPIUrl(folderName, fileName);
+    // });
   }
 
 }

@@ -10,6 +10,7 @@ class ImageGridItem extends React.Component {
     this.state = {
       item: props.item,
       width: props.width,
+      onClick: props.onClick,
     };
   }
 
@@ -20,7 +21,7 @@ class ImageGridItem extends React.Component {
       <div className="ImageItem" style={{
         height: "280px", width: `${this.state.width}%`,
         float: "left", overflow: "hidden"
-      }}>
+      }} onClick={this.state.onClick}>
         <div className="Image" style={{
           height: "100%", width: "100%",
           backgroundImage: `url(${this.state.item.previewUrl})`,
