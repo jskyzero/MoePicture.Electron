@@ -10,11 +10,19 @@
       "build/**/*",
       "node_modules/**/*",
       "server/**/*",
+      "src/config.js",
       ".electron.js",
       "package.json"
     ],
     "mac": {
-      "category": "your.app.category.type"
+      "category": "your.app.category.type",
+      "icon": "public/img/MoePicture.png"
+    },
+    "win": {
+      "icon": "public/img/MoePicture.png"
+    },
+    "linux": {
+      "icon": "public/img/MoePicture.png"
     },
     "extraMetadata": {
       "main": ".electron.js"
