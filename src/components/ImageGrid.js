@@ -44,7 +44,7 @@ class ImageGrid extends React.Component {
   }
 
   scrollCallback = (e) => {
-    console.log(e.target.scrollHeight, e.target.scrollTop, e.target.clientHeight)
+    // console.log(e.target.scrollHeight, e.target.scrollTop, e.target.clientHeight);
     if (e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight) {
       this.getMoreItems();
     }
@@ -58,12 +58,22 @@ class ImageGrid extends React.Component {
   // }
 
   render = () => {
-    let items = this.state.items ? this.state.items.map((item) => {
-      return <ImageGridItem key={item.id} item={item} />
-    }) : null;
+    // todo each width
+    let totolWidth = window.innerWidth
+      || document.documentElement.clientWidth
+      || document.body.clientWidth;
+    let width = 100 / parseInt(totolWidth / 200);
+
+    let items = this.state.items.map((item) => {
+      return <ImageGridItem key={item.id} item={item} width={width} />
+    });
 
     return (
-      <div style={{ overflowY: "scroll", height: "100vh" }}
+      <div style={{
+        position: "absolute",
+        width: "100%", height: "100vh",
+        overflowY: "scroll"
+      }}
         onScroll={this.scrollCallback}>
 
         {items}

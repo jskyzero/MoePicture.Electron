@@ -1,6 +1,7 @@
 import React from 'react';
 import Settings from './Settings';
 import ImageGrid from './ImageGrid';
+import SingleImage from './SingleImage';
 const { config } = require('../config.js');
 
 
@@ -27,8 +28,12 @@ export default class Shell extends React.Component {
         <Settings />
       }
       {config.WebSites.indexOf(this.state.selectType) > -1 &&
+        <div id="MainImageDiv">
         <ImageGrid websiteType={this.state.selectType}/>
+        <SingleImage />
+        </div>
       }
+
     </div>
   );
 

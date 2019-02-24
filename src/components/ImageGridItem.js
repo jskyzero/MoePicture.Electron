@@ -1,24 +1,48 @@
 import React from 'react';
+import * as PropTypes from "prop-types";
 
 
 class ImageGridItem extends React.Component {
+  static contextTypes = { theme: PropTypes.object };
+
   constructor(props) {
     super(props);
-    this.state = { item: props.item };
+    this.state = {
+      item: props.item,
+      width: props.width,
+    };
   }
 
   render = () => {
+    const { theme } = this.context;
+
     return (
-      <div>
-      {/* {
+      <div className="ImageItem" style={{
+        height: "280px", width: `${this.state.width}%`,
+        float: "left", overflow: "hidden"
+      }}>
+        <div className="Image" style={{
+          height: "100%", width: "100%",
+          backgroundImage: `url(${this.state.item.previewUrl})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}>
+          {/* {
         this.state.item.isSafe && */}
-        <div style={{ height: "200px", width: "10%", float: "left" }}>
-        <img
-          style={{ width: "100%", height: "100%" }}
-          src={this.state.item.previewUrl}
-          alt={this.state.item.title} />
-      </div>
-      {/* } */}
+          {/* } */}
+        </div>
+        <div className="Content" style={{
+          height: "100%", width: "100%",
+          position: "relative", top: "-280px"
+        }}>
+          <h3 style={{ fontFamily: theme.fonts.sansSerifFonts }}>
+            {this.state.item.title}
+          </h3>
+          <p>
+          {"Tags: " + this.state.item.tags}
+          </p>
+        </div>
       </div>
     )
   }
