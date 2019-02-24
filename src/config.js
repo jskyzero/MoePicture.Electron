@@ -63,10 +63,10 @@ const config = {
   "WebSites": ["Yande", "Konachan", "Danbooru", "Gelbooru", "Safebooru"],
   "WebSiteUrls": {
     "Yande": "https://yande.re/post.xml?limit=100",
-    "Konachan": "http://konachan.com/post.xml?limit=100",
+    "Konachan": "https://konachan.com/post.xml?limit=100",
     "Danbooru": "https://danbooru.donmai.us/posts.xml?limit=100",
     "Gelbooru": "https://gelbooru.com/index.php?page=dapi&s=post&q=index&limit=100",
-    "Safebooru": "http://safebooru.org/index.php?page=dapi&s=post&q=index&limit=100",
+    "Safebooru": "https://safebooru.org/index.php?page=dapi&s=post&q=index&limit=100",
   },
   "GetWebSiteUrl": (websiteType, searchTag, pageIndex) => {
     let searchStr = (searchTag === "") ? "" : ("&tags=" + searchTag);

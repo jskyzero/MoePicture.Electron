@@ -11,7 +11,7 @@ export class App extends React.Component {
           themeName: "light", // set custom theme
           accent: "#0078D7", // set accent color
           useFluentDesign: true, // sure you want use new fluent design.
-          desktopBackgroundImage: "/img/bg.jpg"
+          desktopBackgroundImage: "./img/bg.jpg"
           // set global desktop background image
         })}
       >
