@@ -17,8 +17,12 @@ class WebSite {
     .then(response => {
         let xml = (new DOMParser()).parseFromString(response.data, "application/xml");
         let items = Array.from(xml.getElementsByTagName("post"),
-          node => config.ItemFromXML(node, this.type)).filter(item => item.isOK);
-        return items;
+          node => config.ItemFromXML(node, this.type)).filter(item =>
+            item.isOK && item.isSafe);
+        if (items.length < 100)
+          return Array.prototype.concat(items, this.GetItems());
+        else
+          return items;
       })
   }
 
