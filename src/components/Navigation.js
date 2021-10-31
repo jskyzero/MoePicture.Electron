@@ -48,7 +48,7 @@ export default class Navigation extends React.Component {
           <NavigationView
             isControlled={false}
             style={{width: "100%", height: "100vh", ...baseStyle }}
-            pageTitle="  MoePicture"
+            pageTitle="&#160;MoePicture"
             displayMode="compact"
             autoResize={false}
             initWidth={48}

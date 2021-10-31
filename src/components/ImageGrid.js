@@ -23,7 +23,7 @@ class ImageGrid extends React.Component {
     })
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     // You don't have to do this check first, but it can help prevent an unneeded render
     if (nextProps.websiteType !== this.state.websiteType) {
       this.setState({

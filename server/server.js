@@ -37,7 +37,7 @@ const proxyAPIProcess = (paramConfig, res) => {
       "Content-Length": data.length,
       "Content-Type": response.headers['content-type'],
       "Access-Control-Allow-Origin": "*"});
-    res.end(data);
+    res.end(data, "binary");
   })
 }
 

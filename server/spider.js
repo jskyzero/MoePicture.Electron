@@ -13,7 +13,12 @@ const downloadImage = (url, path, callback) => {
 }
 
 const loadUrl = (url, callback) => {
-  request(url, (error, response, body) => {
+  var requestSettings = {
+    method: 'GET',
+    url: url,
+    encoding: null
+};
+  request(requestSettings, (error, response, body) => {
     error && console.log(error)
     callback(response, body);
   });

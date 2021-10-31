@@ -1,6 +1,7 @@
 import React from 'react';
 import * as PropTypes from "prop-types";
-import LazyLoad, { lazyload } from 'react-lazyload';
+import LazyLoad from 'react-lazyload';
+const { config } = require('../config.js');
 
 class ImageGridItem extends React.Component {
   static contextTypes = { theme: PropTypes.object };
@@ -14,16 +15,21 @@ class ImageGridItem extends React.Component {
     };
   }
 
+  OnErrorCallback = (event) => {
+    // console.log(event.currentTarget.src);
+    event.currentTarget.src = config.proxyAPIUrl(this.state.item.sampleUrl);
+    // console.log(event.srcElement);
+
+    // event.srcElement.src = config.proxyAPIUrl(this.state.sampleUrl);
+    // console.log(this.state);
+  }
+
   render = () => {
     const { theme } = this.context;
 
     return (
       <div className="ImageItem" style={{
-        // height: "280px", width: `${this.state.width}%`,
-        // height: "280px", width: "280px",
         // width: "100%",
-        // float: "left",
-        // overflow: "hidden"
       }} onClick={this.state.onClick}>
 
         <LazyLoad
@@ -41,13 +47,13 @@ class ImageGridItem extends React.Component {
         }} />
           }>
         <img className="Image"
+          onError={this.OnErrorCallback}
           src={this.state.item.sampleUrl}
           alt={this.state.item.sampleUrl}
           style={{
             width: "100%",
             verticalAlign: "middle",
             animation: "fade-in 1s",
-
         }} />
         </LazyLoad>
 

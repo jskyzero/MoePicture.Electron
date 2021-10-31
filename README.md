@@ -15,8 +15,9 @@ Help you to get moe pictures more easily😄 - Electron
 ## Todo
 
 1. proxy
-2. picturewall
+2. ✔ picturewall
 3. cache
+4. image show
 
 
 ## Reference

@@ -60,7 +60,9 @@ const config = {
   // WebSite Static variable
   //
   //
-  "WebSites": ["Yande", "Konachan", "Danbooru", "Gelbooru", "Safebooru"],
+  // "WebSites": ["Yande", "Konachan", "Danbooru", "Gelbooru", "Safebooru"],
+  "WebSites": ["Yande", "Konachan", "Danbooru"],
+
   "WebSiteUrls": {
     "Yande": "https://yande.re/post.xml?limit=100",
     "Konachan": "https://konachan.com/post.xml?limit=100",
