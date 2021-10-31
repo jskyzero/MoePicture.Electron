@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path')
 const request = require('request');
 
+"use strict"
+
 const downloadImage = (url, path, callback) => {
   ensureDirectoryExistence(path);
   request.get(url)

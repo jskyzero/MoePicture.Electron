@@ -1,18 +1,17 @@
-const url = require("url");
-const http = require('http');
-const path = require("path");
+const url  = require("url"); // for url.parse
+const http = require('http'); // for listen
+const path = require("path"); // for path.extname
 
 "use strict"
 
-const { spider } = require('./spider.js');
-const { config } = require('../src/config.js');
+const { spider } = require('./spider.js');  // request tool module
+const { config } = require('../src/config.js'); // config settings
 
 const onRequest = (request, response) => {
   // request
-  const pathname = url.parse(request.url).pathname;
+  const pathname = url.parse(request.url, true).pathname;
   const params = url.parse(request.url, true).query;
   console.log("Server: ", "Request for " + pathname + " received.");
-
 
   // process
   switch(pathname) {
