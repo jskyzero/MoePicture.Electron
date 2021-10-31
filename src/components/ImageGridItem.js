@@ -10,7 +10,7 @@ class ImageGridItem extends React.Component {
     super(props);
     this.state = {
       item: props.item,
-      width: props.width,
+      mainAPIUrl: props.mainAPIUrl,
       onClick: props.onClick,
     };
   }
@@ -24,51 +24,79 @@ class ImageGridItem extends React.Component {
     // console.log(this.state);
   }
 
+  OnLoadCallback = (event) => {
+    event.currentTarget.style.opacity = 1;
+    event.currentTarget.style.animation = "blur-out 0.5s";
+    // console.log(event.srcElement);
+
+    // event.srcElement.src = config.proxyAPIUrl(this.state.sampleUrl);
+    // console.log(this.state);
+  }
+
   render = () => {
     const { theme } = this.context;
 
     return (
       <div className="ImageItem" style={{
-        // width: "100%",
+        overflow: 'hidden',
+        margin: "1px",
+        borderRadius: "5px",
+        // border: "1px solid #b2c8dc"
       }} onClick={this.state.onClick}>
 
         <LazyLoad
-          height={200}
+          height={400}
           offset={100}
           scrollContainer="#ImageScroll"
-          placeholder={
-            <img className="Image"
-          src={"./img/bg.jpg"}
-          alt={"图片加载中"}
-          style={{
-            height:"200px",
-            width: "100%",
-            verticalAlign: "middle",
-        }} />
-          }>
-        <img className="Image"
-          onError={this.OnErrorCallback}
-          src={this.state.item.sampleUrl}
-          alt={this.state.item.sampleUrl}
-          style={{
-            width: "100%",
-            verticalAlign: "middle",
-            animation: "fade-in 1s",
-        }} />
+        >
+          <div style={{
+            position: "relative",
+          }}>
+
+            <div style={{
+              position: "relative",
+              width: "100%",
+            }}>
+              <img className="Image"
+                onError={this.OnErrorCallback}
+                onLoad={this.OnLoadCallback}
+                src={this.state.mainAPIUrl}
+                alt={this.state.item.sampleUrl}
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  verticalAlign: "middle",
+                  opacity: 0,
+                  zIndex:"1",
+                }} />
+            </div>
+
+            <div className="Content" style={{
+              position: "absolute",
+              padding: "20px"
+            }}>
+              <h3 style={{ fontFamily: theme.fonts.sansSerifFonts }}>
+                {this.state.item.title}
+              </h3>
+              <p>
+                {"Tags: " + this.state.item.tags}
+              </p>
+            </div>
+          </div>
+
+          <img className="Image"
+            onError={this.OnErrorCallback}
+            src={this.state.item.previewUrl}
+            alt={this.state.item.sampleUrl}
+            style={{
+              width: "100%",
+              verticalAlign: "middle",
+              animation: "blur-in 2s",
+              filter: "blur(4px)",
+            }} />
         </LazyLoad>
 
-        {/* <div className="Content" style={{
-          height: "100%", width: "100%",
-          position: "relative", top: "-280px",
-          padding: "20px"
-        }}>
-          <h3 style={{ fontFamily: theme.fonts.sansSerifFonts }}>
-            {this.state.item.title}
-          </h3>
-          <p>
-          {"Tags: " + this.state.item.tags}
-          </p>
-        </div> */}
+
       </div>
     )
   }

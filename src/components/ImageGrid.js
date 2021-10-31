@@ -1,7 +1,7 @@
 import React from 'react';
 import ImageGridItem from './ImageGridItem'
 import WebSite from '../services/website';
-
+const { config } = require('../config.js');
 
 class ImageGrid extends React.Component {
   constructor(props) {
@@ -51,7 +51,8 @@ class ImageGrid extends React.Component {
   }
 
   getImage = (ImgUrl, fileName, e) => {
-    this.website.GetImage(ImgUrl, this.website.type, fileName + ".jpg");
+    console.log(ImgUrl, fileName, e);
+    // this.website.GetImage(ImgUrl, this.website.type, fileName + ".jpg");
     // this.website.GetImage().then((url) => {
     //   this.setState({ str: url });
     // });
@@ -59,13 +60,14 @@ class ImageGrid extends React.Component {
 
   render = () => {
     // todo each width
-    let totolWidth = window.innerWidth
-      || document.documentElement.clientWidth
-      || document.body.clientWidth;
-    let width = 100 / parseInt(totolWidth / 200);
+    // let totolWidth = window.innerWidth
+    //   || document.documentElement.clientWidth
+    //   || document.body.clientWidth;
+    // let width = 100 / parseInt(totolWidth / 200);
 
     let items = this.state.items.map((item) => {
-      return <ImageGridItem key={item.id} item={item} width={width}
+      return <ImageGridItem key={item.id} item={item}
+                mainAPIUrl={config.mainAPIUrl(item.sampleUrl, this.website.type, item.id + ".jpg")}
                 onClick={this.getImage.bind(this, item.sampleUrl, item.id)}/>
     });
 

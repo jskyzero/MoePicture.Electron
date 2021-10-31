@@ -8,8 +8,11 @@ const downloadImage = (url, path, callback) => {
   ensureDirectoryExistence(path);
   request.get(url)
     .on('error', (err) => { console.log(err) })
-    .pipe(fs.createWriteStream(path, 'binary')
-    .on('close', callback));
+    .pipe(
+      fs.createWriteStream(path, 'binary')
+      .on('close', () => {readImage(path, callback, (err) => { downloadImage(url, path, callback);})}
+      )
+    );
 }
 
 const loadUrl = (url, callback) => {

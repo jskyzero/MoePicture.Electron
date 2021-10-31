@@ -7,8 +7,8 @@ const config = {
   "configFolder": ".moepicture",
 
   // server config
-  "mainAPIKey": "/moepicture",
-  "imageAPIKey": "/moepicture/img",
+  "mainAPIKey": "/moepicture",  // load or download image
+  "imageAPIKey": "/moepicture/img", // load image
   "proxyAPIKey": "/moepicture/proxy",
 
   // API Part

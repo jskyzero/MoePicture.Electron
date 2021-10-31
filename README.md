@@ -16,8 +16,9 @@ Help you to get moe pictures more easily😄 - Electron
 
 1. proxy
 2. ✔ picturewall
-3. cache
-4. image show
+3. ✔ cache
+4. ✔ image show
+5. first load
 
 
 ## Reference

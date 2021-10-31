@@ -11,7 +11,7 @@ const onRequest = (request, response) => {
   // request
   const pathname = url.parse(request.url, true).pathname;
   const params = url.parse(request.url, true).query;
-  console.log("Server: ", "Request for " + pathname + " received.");
+  console.log("Server: ", "Request for " + pathname);
 
   // process
   switch(pathname) {
@@ -54,11 +54,12 @@ const getMimeType = (pathname) => {
   return type;
 }
 
+// load image
 const imageAPIProcess = (paramConfig, res) => {
-  const pathname = config.imagePath(paramConfig.foldername, paramConfig.filename);
-  const mimeType = getMimeType(pathname);
-  spider.readImage(pathname, (data) => {
-    response.writeHead(200, {
+  const imagePath = config.imagePath(paramConfig.foldername, paramConfig.filename);
+  const mimeType = getMimeType(imagePath);
+  spider.readImage(imagePath, (data) => {
+    res.writeHead(200, {
       "Content-Length": data.length,
       "Content-Type": mimeType,
       "Access-Control-Allow-Origin": "*"});
@@ -69,19 +70,28 @@ const imageAPIProcess = (paramConfig, res) => {
   })
 }
 
-const mainAPIProcess = (paramConfig, response) => {
+// load or download image
+const mainAPIProcess = (paramConfig, res) => {
   const imagePath = config.imagePath(paramConfig.foldername, paramConfig.filename);
-  console.log("Server: ", "file path = " + imagePath);
-
-  spider.downloadImage(paramConfig.url, imagePath, () => {
-    // response
-    response.writeHead(200, {
-      "Content-Type": "text/plain",
+  const mimeType = getMimeType(imagePath);
+  spider.readImage(imagePath, (data) => {
+    res.writeHead(200, {
+      "Content-Length": data.length,
+      "Content-Type": mimeType,
       "Access-Control-Allow-Origin": "*"});
-    response.write(imagePath);
-    console.log("Server: ", "file path = " + imagePath + " download finish");
-    response.end();
-  });
+    res.end(data);
+    console.log("Server: ", "Load From Cache" + "file path = " + imagePath);
+  }, () => {
+    spider.downloadImage(paramConfig.url, imagePath, () => {
+      // response
+      res.writeHead(200, {
+        "Content-Type": "text/plain",
+        "Access-Control-Allow-Origin": "*"});
+      res.write(imagePath);
+      console.log("Server: ", "Download Finish" + "file path = " + imagePath);
+      res.end();
+    });
+  })
 }
 
 const defaultProcess = (res) => {
