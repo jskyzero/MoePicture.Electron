@@ -23,8 +23,8 @@ before_deploy:
   - git config --local user.name "jskyzero"
   - git config --local user.email "jskyzero@outlook.com"
   # - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
-  - export TRAVIS_TAG="0.1.1"
-  - git tag $TRAVIS_TAG
+  # - export TRAVIS_TAG="0.1.1"
+  # - git tag $TRAVIS_TAG
 
 deploy:
   provider: releases
