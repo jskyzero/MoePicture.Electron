@@ -31,5 +31,7 @@ deploy:
   file: "dist"
   api_key: $GITHUB_TOKEN
   file_glob: true
+  overwrite: true
   on:
+    tags: true
     branch: master
