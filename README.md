@@ -21,3 +21,9 @@ Help you to get moe pictures more easily😄 - Electron
 
 ## Reference
 
++ Tags
+
+```Bash
+git tag 0.0.2
+git push origin 0.0.2
+```

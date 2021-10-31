@@ -69,15 +69,50 @@ class ImageGrid extends React.Component {
                 onClick={this.getImage.bind(this, item.sampleUrl, item.id)}/>
     });
 
+    let colItem1 = items.filter((item, index) => 0 === index % 4);
+    let colItem2 = items.filter((item, index) => 0 === index  % 4 -1);
+    let colItem3 = items.filter((item, index) => 0 === index  % 4 -2);
+    let colItem4 = items.filter((item, index) => 0 === index  % 4 -3);
+
+
     return (
-      <div style={{
-        position: "absolute",
-        width: "100%", height: "100vh",
-        overflowY: "scroll"
+      <div
+        id="ImageScroll"
+        style={{
+        height: "100vh",
+        overflowY: "scroll",
+        display: "flex"
       }}
         onScroll={this.scrollCallback}>
 
-        {items}
+        <div style={{
+          flex:"25%",
+          maxWidth: "25%",
+        }}>
+          {colItem1}
+        </div>
+
+        <div style={{
+          flex:"25%",
+          maxWidth: "25%",
+        }}>
+          {colItem2}
+        </div>
+
+        <div style={{
+          flex:"25%",
+          maxWidth: "25%",
+        }}>
+          {colItem3}
+        </div>
+
+        <div style={{
+          flex:"25%",
+          maxWidth: "25%",
+        }}>
+          {colItem4}
+        </div>
+
         {/* <Button onClick={this.getImage}
             tooltip="Mini Tooltip">
           {this.state.str || "click" }

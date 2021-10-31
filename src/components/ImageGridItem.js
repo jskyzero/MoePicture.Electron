@@ -1,6 +1,6 @@
 import React from 'react';
 import * as PropTypes from "prop-types";
-
+import LazyLoad, { lazyload } from 'react-lazyload';
 
 class ImageGridItem extends React.Component {
   static contextTypes = { theme: PropTypes.object };
@@ -20,21 +20,38 @@ class ImageGridItem extends React.Component {
     return (
       <div className="ImageItem" style={{
         // height: "280px", width: `${this.state.width}%`,
-        height: "280px", width: "280px",
-        float: "left", overflow: "hidden"
+        // height: "280px", width: "280px",
+        // width: "100%",
+        // float: "left",
+        // overflow: "hidden"
       }} onClick={this.state.onClick}>
-        <div className="Image" style={{
-          height: "100%", width: "100%",
-          backgroundImage: `url(${this.state.item.previewUrl})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}>
-          {/* {
-        this.state.item.isSafe && */}
-          {/* } */}
-        </div>
-        <div className="Content" style={{
+
+        <LazyLoad
+          height={200}
+          offset={100}
+          scrollContainer="#ImageScroll"
+          placeholder={
+            <img className="Image"
+          src={"./img/bg.jpg"}
+          alt={"图片加载中"}
+          style={{
+            height:"200px",
+            width: "100%",
+            verticalAlign: "middle",
+        }} />
+          }>
+        <img className="Image"
+          src={this.state.item.sampleUrl}
+          alt={this.state.item.sampleUrl}
+          style={{
+            width: "100%",
+            verticalAlign: "middle",
+            animation: "fade-in 1s",
+
+        }} />
+        </LazyLoad>
+
+        {/* <div className="Content" style={{
           height: "100%", width: "100%",
           position: "relative", top: "-280px",
           padding: "20px"
@@ -45,7 +62,7 @@ class ImageGridItem extends React.Component {
           <p>
           {"Tags: " + this.state.item.tags}
           </p>
-        </div>
+        </div> */}
       </div>
     )
   }
