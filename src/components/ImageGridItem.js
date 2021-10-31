@@ -19,7 +19,8 @@ class ImageGridItem extends React.Component {
 
     return (
       <div className="ImageItem" style={{
-        height: "280px", width: `${this.state.width}%`,
+        // height: "280px", width: `${this.state.width}%`,
+        height: "280px", width: "280px",
         float: "left", overflow: "hidden"
       }} onClick={this.state.onClick}>
         <div className="Image" style={{
@@ -35,7 +36,8 @@ class ImageGridItem extends React.Component {
         </div>
         <div className="Content" style={{
           height: "100%", width: "100%",
-          position: "relative", top: "-280px"
+          position: "relative", top: "-280px",
+          padding: "20px"
         }}>
           <h3 style={{ fontFamily: theme.fonts.sansSerifFonts }}>
             {this.state.item.title}
