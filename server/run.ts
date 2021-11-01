@@ -2,8 +2,7 @@
 // run as
 //  node run.js
 
-
-const { server } = require('./server.js')
+import * as server from './server'
 const { config } = require('../src/config.js')
 
 
