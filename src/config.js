@@ -198,7 +198,7 @@ const config = {
       for (let key in config.WebSiteMap2[websiteType]) {
         item[key] = config.WebSiteMap2[websiteType][key](item[key]);
       }
-      item["isOK"] = true;
+      item["isOK"] = item["isSafe"];
     }
     catch (e) {
       console.log(e);
