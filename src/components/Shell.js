@@ -10,8 +10,13 @@ export default class Shell extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectType: props.selectType
+      selectType: props.selectType,
+      settings: false,
     };
+  }
+
+  setSettings(newSettings) {
+    this.setState({settings:newSettings});
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -25,11 +30,14 @@ export default class Shell extends React.Component {
   render = () => (
     <div style={{ marginLeft: "0px"}}>
       {this.state.selectType === "Settings" &&
-        <Settings />
+        <Settings settings={this.state.settings}
+          changeSettings={this.setSettings.bind(this)}/>
       }
       {config.WebSites.indexOf(this.state.selectType) > -1 &&
         <div id="MainImageDiv">
-        <ImageGrid websiteType={this.state.selectType}/>
+        <ImageGrid
+          websiteType={this.state.selectType}
+          settings={this.state.settings}/>
         <SingleImage />
         </div>
       }

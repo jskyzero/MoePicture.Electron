@@ -9,6 +9,7 @@ class ImageGrid extends React.Component {
     this.state = {
       websiteType: props.websiteType,
       items: [],
+      settings: props.settings
     };
     this.website = new WebSite(props.websiteType, "");
   }
@@ -36,7 +37,7 @@ class ImageGrid extends React.Component {
   }
 
   getMoreItems = () => {
-    this.website.GetItems().then((newItems) => {
+    this.website.GetItems(this.state.settings).then((newItems) => {
       this.setState((prevState, props) => ({
         items: prevState.items.concat(newItems),
       }));

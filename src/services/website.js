@@ -10,14 +10,16 @@ class WebSite {
     this.index = 1;
   }
 
-  GetItems() {
+  GetItems(notSafe=false) {
     return axios.get(config.proxyAPIUrl(
       config.GetWebSiteUrl(this.type, this.tag, this.index++)
     ))
     .then(response => {
         let xml = (new DOMParser()).parseFromString(response.data, "application/xml");
         let items = Array.from(xml.getElementsByTagName("post"),
-          node => config.ItemFromXML(node, this.type)).filter(item => item.isOK);
+          node => config.ItemFromXML(node, this.type)).filter(
+            item => {return item.isOK && ((!notSafe && item.isSafe) || notSafe)}
+          );
         return items;
       })
   }

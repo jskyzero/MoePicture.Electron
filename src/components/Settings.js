@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as PropTypes from "prop-types";
-import CheckBox from "react-uwp/CheckBox";
+import { Checkbox } from '@fluentui/react';
 
 export default class Settings extends React.Component {
   static contextTypes = {
@@ -9,15 +9,16 @@ export default class Settings extends React.Component {
 
     constructor(props) {
       super(props);
-      // this.state = {
-      //   checked: false,
-      // };
-
+      this.state = {
+        settings: props.settings,
+      };
   };
 
-  NodeClickCallback = (event) => {
-    // this.setState({checked:!this.state.checked});
-    // console.log(this.state);
+  NodeClickCallback = (event, isChecked) => {
+    console.log(isChecked);
+    // this.props.settings= isChecked;
+    this.props.changeSettings(isChecked);
+    this.setState({settings:isChecked});
     // console.log(event);
   }
 
@@ -33,10 +34,10 @@ export default class Settings extends React.Component {
       <div style={{ margin: "20px" }} >
         <h2>Settings</h2>
 
-        <CheckBox
+        <Checkbox
           defaultChecked={false}
           label="Show UnSafe Picture"
-          onClick={this.NodeClickCallback}
+          onChange={this.NodeClickCallback}
         />
       </div>
     );
