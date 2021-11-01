@@ -14,13 +14,13 @@ Help you to get moe pictures more easily😄 - Electron
 
 ## Todo
 
-1. proxy
+1. ❌ proxy
 2. ✔ picturewall
 3. ✔ cache
 4. ✔ image show
 5. first load
 6. ✔ settings page
-7. js to ts
+7. ❌ js to ts
 8. single page view
 9. error manage
 10. ✔ change theme

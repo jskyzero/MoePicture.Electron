@@ -4,11 +4,11 @@ import * as PropTypes from "prop-types";
 // import NavigationView from "react-uwp/NavigationView";
 // import SplitViewCommand from "react-uwp/SplitViewCommand";
 
-import { Nav, INavLink, INavStyles, INavLinkGroup } from '@fluentui/react/lib/Nav';
+import { Nav } from '@fluentui/react/lib/Nav';
 
 import Shell from "./Shell"
 
-const { config } = require('../config.js');
+// const { config } = require('../config.js');
 
 export default class Navigation extends React.Component {
   static contextTypes = { theme: PropTypes.object };
