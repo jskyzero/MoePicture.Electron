@@ -19,11 +19,13 @@ Help you to get moe pictures more easily😄 - Electron
 3. ✔ cache
 4. ✔ image show
 5. first load
-6. settings page
+6. ✔ settings page
 7. js to ts
 8. single page view
 9. error manage
-10. change theme
+10. ✔ change theme
+11. local folder
+12. log
 
 
 ## Reference

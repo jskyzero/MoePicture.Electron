@@ -1,8 +1,11 @@
 import * as React from "react";
 import * as PropTypes from "prop-types";
 
-import NavigationView from "react-uwp/NavigationView";
-import SplitViewCommand from "react-uwp/SplitViewCommand";
+// import NavigationView from "react-uwp/NavigationView";
+// import SplitViewCommand from "react-uwp/SplitViewCommand";
+
+import { Nav, INavLink, INavStyles, INavLinkGroup } from '@fluentui/react/lib/Nav';
+
 import Shell from "./Shell"
 
 const { config } = require('../config.js');
@@ -20,46 +23,80 @@ export default class Navigation extends React.Component {
     // this.handleNodeClick = this.handleNodeClick.bind(this);
   }
 
-  NodeClickCallback = (event) => {
-    // console.log(event.currentTarget.id);
-    this.setState({selectType: event.currentTarget.id});
+  NodeClickCallback = (event, item) => {
+    // console.log(item);
+    this.setState({ selectType: item.key });
     // console.log(this.state);
   }
 
   render() {
-    const { theme } = this.context;
 
-    const baseStyle = theme.prefixStyle({
-      margin: 0
-    });
 
-    const navigationTopNodes = config.WebSites.map((each) =>
-      <SplitViewCommand icon={"\uEB9F"} label={each} id = {each}
-        onClick={this.NodeClickCallback}/>
-    );
+    const navLinkGroups = [
+      {
+        links: [
+          {
+            icon: 'ImageCrosshair',
+            name: 'Yande',
+            key: 'Yande',
+            target: 'Yande',
+          },
+          {
+            icon: 'FileImage',
+            name: 'Konachan',
+            key: 'Konachan',
+            target: 'Konachan',
+          },
+          {
+            icon: 'ImageDiff',
+            name: 'Danbooru',
+            key: 'Danbooru',
+            target: 'Danbooru',
+          },
 
-    const navigationBottomNode = [
-      <SplitViewCommand icon={"\uE713"} label="Settings" id ="Settings"
-        onClick={this.NodeClickCallback}/>,
+          {
+            icon: 'Folder',
+            name: 'Local',
+            isExpanded: true,
+            target: 'Local',
+            disabled: true,
+          },
+          {
+            icon:'Settings',
+            name: 'Settings',
+            key: 'Settings',
+            target: 'Settings',
+          }
+        ],
+      },
     ];
 
     return (
-      <div style={{ height: "100vh", overflow: "hidden"}}>
-          <NavigationView
-            isControlled={false}
-            style={{width: "100%", height: "100vh", ...baseStyle }}
-            pageTitle="&#160;MoePicture"
-            displayMode="compact"
-            autoResize={false}
-            initWidth={48}
-            expandedWidth={200}
-            defaultExpanded={true}
-            navigationTopNodes={navigationTopNodes}
-            navigationBottomNodes={navigationBottomNode}
-            focusNavigationNodeIndex={0}
-          >
-          <Shell selectType={this.state.selectType}/>
-          </NavigationView>
+      <div style={{
+        overflow: "hidden",
+        position: 'relative',
+        minHeight: '100vh',
+        }}>
+        <div style={{
+            width: "160px",
+            height: "100%",
+            position: "absolute",
+            boxSizing: 'border-box',
+            border: '1px solid #eee',
+            // float: "left",
+          }}>
+          <Nav
+            onLinkClick={ this.NodeClickCallback.bind(this)}
+            selectedKey={this.state.selectType}
+            groups={navLinkGroups}
+            styles={{
+              height: "100%",
+            }}
+          />
+        </div>
+
+        <Shell selectType={this.state.selectType} />
+
       </div>
     );
   }

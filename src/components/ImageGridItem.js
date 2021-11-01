@@ -34,7 +34,6 @@ class ImageGridItem extends React.Component {
   }
 
   render = () => {
-    const { theme } = this.context;
 
     return (
       <div className="ImageItem" style={{
@@ -45,8 +44,8 @@ class ImageGridItem extends React.Component {
       }} onClick={this.state.onClick}>
 
         <LazyLoad
-          height={400}
-          offset={100}
+          height={200}
+          offset={400}
           scrollContainer="#ImageScroll"
         >
           <div style={{
@@ -75,7 +74,7 @@ class ImageGridItem extends React.Component {
               position: "absolute",
               padding: "20px"
             }}>
-              <h3 style={{ fontFamily: theme.fonts.sansSerifFonts }}>
+              <h3 style={{ }}>
                 {this.state.item.title}
               </h3>
               <p>

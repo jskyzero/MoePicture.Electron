@@ -28,7 +28,7 @@ export default class Shell extends React.Component {
 
 
   render = () => (
-    <div style={{ marginLeft: "0px"}}>
+    <div style={{ marginLeft: "160px"}}>
       {this.state.selectType === "Settings" &&
         <Settings settings={this.state.settings}
           changeSettings={this.setSettings.bind(this)}/>

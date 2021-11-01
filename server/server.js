@@ -33,11 +33,16 @@ const onRequest = (request, response) => {
 const proxyAPIProcess = (paramConfig, res) => {
   const url = paramConfig.url;
   spider.loadUrl(url, (response, data) => {
+
+    if (data === undefined) {
+      console.log("Error on paramConfig");
+    } else {
     res.writeHead(200, {
       "Content-Length": data.length,
       "Content-Type": response.headers['content-type'],
       "Access-Control-Allow-Origin": "*"});
     res.end(data, "binary");
+    }
   })
 }
 

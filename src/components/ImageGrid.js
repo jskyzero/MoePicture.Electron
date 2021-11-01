@@ -72,6 +72,8 @@ class ImageGrid extends React.Component {
                 onClick={this.getImage.bind(this, item.sampleUrl, item.id)}/>
     });
 
+    if (items.length <= 8) this.getMoreItems();
+
     let colItem1 = items.filter((item, index) => 0 === index % 4);
     let colItem2 = items.filter((item, index) => 0 === index  % 4 -1);
     let colItem3 = items.filter((item, index) => 0 === index  % 4 -2);
@@ -84,7 +86,8 @@ class ImageGrid extends React.Component {
         style={{
         height: "100vh",
         overflowY: "scroll",
-        display: "flex"
+        display: "flex",
+        paddingRight: "10px"
       }}
         onScroll={this.scrollCallback}>
 

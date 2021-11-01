@@ -35,8 +35,8 @@ export default class Settings extends React.Component {
         <h2>Settings</h2>
 
         <Checkbox
-          defaultChecked={false}
-          label="Show UnSafe Picture"
+          defaultChecked={this.state.settings}
+          label="Show Un Safe Picture"
           onChange={this.NodeClickCallback}
         />
       </div>
