@@ -3,7 +3,7 @@
 //  node run.js
 
 import * as server from './server'
-const { config } = require('../src/config.js')
+import * as Config from '../src/services/config'
 
 
-server.serve(config.port);
+server.serve(Config.config.port);

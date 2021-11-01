@@ -10,6 +10,7 @@
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "@types/request": "^2.48.7",
+    "fast-xml-parser": "^3.21.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -21,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "ts-node ./server/run.ts"
+    "server": "node --loader ts-node/esm ./server/helloworld.ts"
   },
   "eslintConfig": {
     "extends": [

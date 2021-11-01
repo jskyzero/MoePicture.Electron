@@ -3,25 +3,25 @@ import http from 'http'; // for listen
 import path from "path"; // for path.extname
 
 import  * as spider from './spider';  // request tool module
-const { config } = require('../src/config.js'); // config settings
+import * as Config from '../src/services/config'; // config settings
 
 
-function onRequest(request, response) {
+function onRequest(request:http.IncomingMessage, response: http.ServerResponse) {
   // request
-  const pathname = url.parse(request.url, true).pathname;
-  const params = url.parse(request.url, true).query;
+  const pathname = url.parse(request.url!, true).pathname;
+  const params = url.parse(request.url!, true).query;
   console.log("Server: ", "Request for " + pathname);
 
   // process
   switch (pathname) {
-    case config.mainAPIKey:
-      mainAPIProcess(config.mainAPIParams(params), response);
+    case Config.config.mainAPIKey:
+      mainAPIProcess(params, response);
       break;
-    case config.imageAPIKey:
-      imageAPIProcess(config.imageAPIParams(params), response);
+    case Config.config.imageAPIKey:
+      imageAPIProcess(params, response);
       break;
-    case config.proxyAPIKey:
-      proxyAPIProcess(config.proxyAPIParams(params), response);
+    case Config.config.proxyAPIKey:
+      proxyAPIProcess(params, response);
       break;
     default:
       defaultProcess(response);
@@ -29,9 +29,9 @@ function onRequest(request, response) {
   }
 }
 
-function proxyAPIProcess(paramConfig, res) {
+function proxyAPIProcess(paramConfig : any, res: http.ServerResponse) {
   const url = paramConfig.url;
-  spider.loadUrl(url, (response, data) => {
+  spider.loadUrl(url, (response:any, data:any) => {
 
     if (data === undefined) {
       console.log("Error on paramConfig");
@@ -46,8 +46,8 @@ function proxyAPIProcess(paramConfig, res) {
   });
 }
 
-function getMimeType(pathname) {
-  var validExtensions = {
+function getMimeType(pathname:string) {
+  var validExtensions: Record<string, string> = {
     ".html": "text/html",
     ".js": "application/javascript",
     ".css": "text/css",
@@ -61,10 +61,10 @@ function getMimeType(pathname) {
 }
 
 // load image
-function imageAPIProcess(paramConfig, res) {
-  const imagePath = config.imagePath(paramConfig.foldername, paramConfig.filename);
+function imageAPIProcess(paramConfig : any, res: http.ServerResponse) {
+  const imagePath = Config.imagePath(paramConfig.foldername, paramConfig.filename);
   const mimeType = getMimeType(imagePath);
-  spider.readImage(imagePath, (data) => {
+  spider.readImage(imagePath, (data:any) => {
     res.writeHead(200, {
       "Content-Length": data.length,
       "Content-Type": mimeType,
@@ -78,10 +78,10 @@ function imageAPIProcess(paramConfig, res) {
 }
 
 // load or download image
-function mainAPIProcess(paramConfig, res) {
-  const imagePath = config.imagePath(paramConfig.foldername, paramConfig.filename);
+function mainAPIProcess(paramConfig: any, res: http.ServerResponse) {
+  const imagePath = Config.imagePath(paramConfig.foldername, paramConfig.filename);
   const mimeType = getMimeType(imagePath);
-  spider.readImage(imagePath, (data) => {
+  spider.readImage(imagePath, (data:any) => {
     res.writeHead(200, {
       "Content-Length": data.length,
       "Content-Type": mimeType,
@@ -103,7 +103,7 @@ function mainAPIProcess(paramConfig, res) {
   });
 }
 
-function defaultProcess(res) {
+function defaultProcess(res: http.ServerResponse) {
   res.writeHead(500);
   res.end();
 }
