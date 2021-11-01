@@ -8,9 +8,11 @@ class WebSite {
     this.type = websiteType;
     this.tag = searchTag;
     this.index = 1;
+    this.busy = false;
   }
 
   GetItems(notSafe=false) {
+    this.busy = true;
     return axios.get(config.proxyAPIUrl(
       config.GetWebSiteUrl(this.type, this.tag, this.index++)
     ))
@@ -20,6 +22,7 @@ class WebSite {
           node => config.ItemFromXML(node, this.type)).filter(
             item => {return item.isOK && ((!notSafe && item.isSafe) || notSafe)}
           );
+        this.busy = false;
         return items;
       })
   }

@@ -37,7 +37,7 @@ class ImageGrid extends React.Component {
   }
 
   getMoreItems = () => {
-    this.website.GetItems(this.state.settings).then((newItems) => {
+    !this.website.busy && this.website.GetItems(this.state.settings).then((newItems) => {
       this.setState((prevState, props) => ({
         items: prevState.items.concat(newItems),
       }));
@@ -45,8 +45,8 @@ class ImageGrid extends React.Component {
   }
 
   scrollCallback = (e) => {
-    // console.log(e.target.scrollHeight, e.target.scrollTop, e.target.clientHeight);
-    if (e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight) {
+    console.log(e.target.scrollHeight - e.target.scrollTop, e.target.clientHeight);
+    if (e.target.scrollHeight - e.target.scrollTop - 200 <= e.target.clientHeight) {
       this.getMoreItems();
     }
   }
@@ -68,52 +68,52 @@ class ImageGrid extends React.Component {
 
     let items = this.state.items.map((item) => {
       return <ImageGridItem key={item.id} item={item}
-                mainAPIUrl={config.mainAPIUrl(item.sampleUrl, this.website.type, item.id + ".jpg")}
-                onClick={this.getImage.bind(this, item.sampleUrl, item.id)}/>
+        mainAPIUrl={config.mainAPIUrl(item.sampleUrl, this.website.type, item.id + ".jpg")}
+        onClick={this.getImage.bind(this, item.sampleUrl, item.id)} />
     });
 
     if (items.length <= 8) this.getMoreItems();
 
     let colItem1 = items.filter((item, index) => 0 === index % 4);
-    let colItem2 = items.filter((item, index) => 0 === index  % 4 -1);
-    let colItem3 = items.filter((item, index) => 0 === index  % 4 -2);
-    let colItem4 = items.filter((item, index) => 0 === index  % 4 -3);
+    let colItem2 = items.filter((item, index) => 0 === index % 4 - 1);
+    let colItem3 = items.filter((item, index) => 0 === index % 4 - 2);
+    let colItem4 = items.filter((item, index) => 0 === index % 4 - 3);
 
 
     return (
       <div
         id="ImageScroll"
         style={{
-        height: "100vh",
-        overflowY: "scroll",
-        display: "flex",
-        paddingRight: "10px"
-      }}
+          height: "100vh",
+          overflowY: "scroll",
+          display: "flex",
+          paddingRight: "10px"
+        }}
         onScroll={this.scrollCallback}>
 
         <div style={{
-          flex:"25%",
+          flex: "25%",
           maxWidth: "25%",
         }}>
           {colItem1}
         </div>
 
         <div style={{
-          flex:"25%",
+          flex: "25%",
           maxWidth: "25%",
         }}>
           {colItem2}
         </div>
 
         <div style={{
-          flex:"25%",
+          flex: "25%",
           maxWidth: "25%",
         }}>
           {colItem3}
         </div>
 
         <div style={{
-          flex:"25%",
+          flex: "25%",
           maxWidth: "25%",
         }}>
           {colItem4}
