@@ -1,62 +1,43 @@
 {
-  "name": "moe-picture",
+  "name": "moepicture",
   "version": "0.1.0",
-  "main": ".electron.js",
-  "homepage": ".",
   "private": true,
-  "build": {
-    "appId": "your.id",
-    "files": [
-      "build/**/*",
-      "node_modules/**/*",
-      "server/**/*",
-      "src/config.js",
-      ".electron.js",
-      "package.json"
-    ],
-    "mac": {
-      "category": "your.app.category.type",
-      "icon": "public/img/MoePicture.png"
-    },
-    "win": {
-      "icon": "public/img/MoePicture.png"
-    },
-    "linux": {
-      "icon": "public/img/MoePicture.png"
-    },
-    "extraMetadata": {
-      "main": ".electron.js"
-    }
-  },
   "dependencies": {
-    "@fluentui/react": "^8.37.6",
-    "axios": "^0.24.0",
-    "react-lazyload": "^3.2.0",
-    "request": "^2.88.2"
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^12.20.36",
+    "@types/react": "^17.0.33",
+    "@types/react-dom": "^17.0.10",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "typescript": "^4.4.4",
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "electron": "electron .",
-    "electron-builder": "npm run-script build && electron-builder ."
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "devDependencies": {
-    "electron": "^15.2.0",
-    "electron-builder": "^20.44.4",
-    "electron-packager": "^13.1.0",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-scripts": "^2.1.8"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
