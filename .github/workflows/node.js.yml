@@ -12,13 +12,13 @@ on:
 jobs:
   build:
 
-    runs-on: [ubuntu-latest, windows-latest, macos-latest]
-      
+    # runs-on: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
         # node-version: [12.x, 14.x, 16.x]
-        node-version: [16.x]
+        node-version: [14.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -29,9 +29,9 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: npm run electron-builder 
+    - run: npm run electron-builder
 
-    
+
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.4
       with:

@@ -2,7 +2,7 @@
 `jskyzero` `2018/12/13`
 
 [![Build Status](https://app.travis-ci.com/jskyzero/MoePicture.Electron.svg?branch=master)](https://app.travis-ci.com/jskyzero/MoePicture.Electron)
-[![Build Status](https://ci.appveyor.com/api/projects/status/github/jskyzero/MoePicture.Electron?svg=true)](https://ci.appveyor.com/project/jskyzero/moepicture-electron)
+[![Build Status](https://ci.appveyor.com/api/projects/status/github/jskyzero/MoePicture.Electron?svg=true)](https://ci.appveyor.com/project/jskyzero/moepicture-electron-s6yn4)
 [![Build Status](https://jskyzero.visualstudio.com/MoePicture.Electron/_apis/build/status/MoePicture.Electron-CI?branchName=master)](https://jskyzero.visualstudio.com/MoePicture.Electron/_build/latest?definitionId=5&branchName=master)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/Sushiscript/sushiscrip/issues)
 
