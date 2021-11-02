@@ -32,12 +32,14 @@ jobs:
     - run: npm run electron-builder
 
 
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v2.2.4
+    - name: Build/release Electron app
+      uses: samuelmeuli/action-electron-builder@v1
       with:
-        # Artifact name
-        name: # optional, default is artifact
-        # A file, directory or wildcard pattern that describes what to upload
-        path: dist/moe-picture-0.1.0-*
-        retention-days: 7
+        # GitHub token, automatically provided to the action
+        # (No need to define this secret in the repo settings)
+        github_token: ${{ secrets.github_token }}
+
+        # If the commit is tagged with a version (e.g. "v1.0.0"),
+        # release the app after building
+        release: ${{ startsWith(github.ref, 'refs/tags/v') }}
 
