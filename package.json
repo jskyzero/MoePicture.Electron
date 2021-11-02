@@ -29,15 +29,8 @@
       "category": "Development"
     },
     "win": {
-      "target": "nsis",
       "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
       "icon": "public/img/MoePicture.png"
-    },
-    "publish": {
-      "provider": "github",
-      "repo": "reponame",
-      "owner": "ownername",
-      "releaseType": "release"
     },
     "extraMetadata": {
       "main": ".electron.js"
