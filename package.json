@@ -5,7 +5,8 @@
   "homepage": ".",
   "private": true,
   "build": {
-    "appId": "your.id",
+    "productName": "moepicture",
+    "appId": "moons.jskyzero.moepicture",
     "files": [
       "build/**/*",
       "node_modules/**/*",
@@ -15,14 +16,28 @@
       "package.json"
     ],
     "mac": {
-      "category": "your.app.category.type",
-      "icon": "public/img/MoePicture.png"
-    },
-    "win": {
-      "icon": "public/img/MoePicture.png"
+      "category": "public.app-category.developer-tools",
+      "icon": "icons/icon.icns",
+      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+      "hardenedRuntime": true,
+      "entitlementsInherit": "build/entitlements.mac.inherit-plist"
     },
     "linux": {
+      "target": "AppImage",
+      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+      "icon": "public/img/MoePicture.png",
+      "category": "Development"
+    },
+    "win": {
+      "target": "nsis",
+      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
       "icon": "public/img/MoePicture.png"
+    },
+    "publish": {
+      "provider": "github",
+      "repo": "reponame",
+      "owner": "ownername",
+      "releaseType": "release"
     },
     "extraMetadata": {
       "main": ".electron.js"
